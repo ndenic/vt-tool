@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visual Comparison Tool - Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <div class="container result-image">
+      <h1>Visual Comparison Tool - Results</h1>
+      <p>The images have a difference of {{ diff_percent }}%.</p>
+      <img src="{{ url_for('static', filename='images/' + test_name + '/result.png') }}" alt="Difference">
+      <a href="/">Back to comparison</a>
+    </div>
+  </body>
+</html>
+
