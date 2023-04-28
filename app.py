@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file
 from services.visual_comparison import compare_images, get_diff_percent
 
 app = Flask(__name__,  template_folder='static/templates/')
+app.config['UPLOAD_FOLDER'] = 'static/images/'
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -45,6 +46,21 @@ def index():
         return render_template('/results.html', diff=diff, diff_percent=diff_percent, test_name=test_name)
 
     return render_template('/index.html')
+
+
+@app.route('/images/<test_name>', methods=['GET'])
+def image_explorer(test_name):
+    images_dir = os.path.join(app.config['UPLOAD_FOLDER'], test_name)
+    if not os.path.exists(images_dir):
+        return f"No images found for test '{test_name}'"
+    images = [f for f in os.listdir(images_dir) if os.path.isfile(os.path.join(images_dir, f))]
+    return render_template('/image_explorer.html', images=images, test_name=test_name)
+
+
+@app.route('/download_diff/<test_name>')
+def download_diff(test_name):
+    image_folder = f'static/images/{test_name}/'
+    return send_file(os.path.join(image_folder, 'result.png'), as_attachment=True)
 
 
 if __name__ == '__main__':

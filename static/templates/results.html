@@ -10,6 +10,8 @@
       <p>The images have a difference of {{ diff_percent }}%.</p>
       <img src="{{ url_for('static', filename='images/' + test_name + '/result.png') }}" alt="Difference">
       <a href="/">Back to comparison</a>
+      <a href="{{ url_for('image_explorer', test_name=test_name) }}">View images</a>
+      <a href="{{ url_for('download_diff', test_name=test_name) }}">Download difference image</a>
     </div>
   </body>
 </html>

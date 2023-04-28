@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Image Explorer</h1>
+      <ul>
+        {% for image in images %}
+        <li><a href="{{ url_for('static', filename='images/' + image) }}">{{ image }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

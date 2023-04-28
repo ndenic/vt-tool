@@ -1,0 +1,1 @@
+# funkcija da pogledas rezultate
